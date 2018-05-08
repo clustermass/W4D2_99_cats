@@ -1,0 +1,7 @@
+<ul>
+    <% @cats.each do |cat| %>
+    <li>
+    <%= render('cat', cat: cat) %>
+    </li>
+    <% end %>
+</ul>

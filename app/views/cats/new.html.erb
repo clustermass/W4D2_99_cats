@@ -1,0 +1,25 @@
+<h2>Create Cat</h2>
+
+  <form action="<%=cats_url%>" method="POST">
+  <label for="name">Name:
+    <input id="name" type="text" name="cat[name]" value="<%= @cat.name %>">
+  </label>
+  <br>
+  <label for="age">Age:
+    <input id="age" type="text" name="cat[age]" value="<%= @cat.age %>">
+  </label>
+  <br>
+  <label for="gender">Gender:
+    <input id="sex" type="text" name="cat[sex]" value="<%= @cat.sex %>">
+  </label>
+  <br>
+  <label for="color">Color:
+    <input id="color" type="text" name="cat[color]" value="<%= @cat.color %>">
+  </label>
+  <br>
+  <label for="description">Description:
+    <input id="description" type="text" name="cat[description]" value="<%= @cat.description %>">
+  </label>
+  <br>
+  <input type="submit" value="Create Cat">
+</form>
