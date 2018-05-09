@@ -18,19 +18,38 @@ class CatsController < ApplicationController
 
   def create
     now = Date.today
-    date_of_birth = Date.parse((now.year - cat_params[age]).to_s + '/01/01') unless cat_params[age] < 0
-    @cat = Cat.new(name: cat_params[name], color: cat_params[color], description: cat_params[description], sex: cat_params[sex], birth_date: date_of_birth)
-    if @cat.create!
+    date_of_birth = Date.parse((now.year - cats_params[:birth_date].to_i).to_s + '/01/01') unless cats_params[:birth_date].to_i < 0
+
+    @cat = Cat.new(cats_params)
+    @cat.update(birth_date: date_of_birth)
+
+    if @cat.save
      redirect_to cat_url(@cat)
     else
-      render :new
+      render json: @cat.errors.full_messages
+    end
+  end
+
+  def edit
+    @cat = Cat.find(params[:id])
+    render :edit
+  end
+
+  def update
+    @cat = Cat.find(params[:id])
+    @cat.update(cats_params)
+
+    if @cat.save
+     redirect_to cat_url(@cat)
+    else
+      render :edit
     end
 
   end
 
 private
   def cats_params
-    params.require(:cat).permit(:name,:color,:age,:sex,:description)
+    params.require(:cat).permit(:name,:color,:birth_date,:sex,:description)
   end
 
 end
